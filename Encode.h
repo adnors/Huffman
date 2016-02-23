@@ -21,13 +21,9 @@ private:
 
 public:
     Encode(ifstream *);
-
     string doEncode();
-
     void getAnzahl();
-
     void buildTree();
-
     int getMinValue();
 
 };

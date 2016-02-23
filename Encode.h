@@ -24,7 +24,8 @@ public:
     string doEncode();
     void getAnzahl();
     void buildTree();
-    int getMinValue();
+
+    int getMinValue(int);
 
 };
 

@@ -27,17 +27,19 @@ void Encode::getAnzahl() {
 }
 
 void Encode::buildTree() {
+    int minValue = getMinValue(0);
+    int minValue2 = getMinValue(minValue);
 
 }
 
-int Encode::getMinValue() {
+int Encode::getMinValue(int start) {
     int i = 0;
     int minValue = anzahl[i];
     while (minValue != 0 && i < ANZAHL_ZEICHEN - 1) {
-        i++;
-        if (anzahl[i] < minValue) {
+        if (anzahl[i] < minValue && start <= minValue) {
             minValue = anzahl[i];
         }
+        i++;
     }
     return minValue;
 }

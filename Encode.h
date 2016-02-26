@@ -4,7 +4,7 @@
 
 #ifndef HUFFMAN_ENCODE_H
 #define HUFFMAN_ENCODE_H
-#define ANZAHL_ZEICHEN 95
+#define CNT_CHAR 95
 
 #include <string>
 #include <fstream>
@@ -13,19 +13,21 @@ using namespace std;
 
 class Encode {
 private:
-    int gesamt;
-    int anzahl[ANZAHL_ZEICHEN];
-    int buchstabe;
-    string zeile;
-    ifstream *datei;
+    int totalchar;
+    int cntdiffchar;
+    int cntchar[CNT_CHAR];
+    int character;
+    string line;
+    ifstream *file;
 
 public:
     Encode(ifstream *);
     string doEncode();
-    void getAnzahl();
+
+    void getcntchar();
     void buildTree();
 
-    int getMinValue(int);
+    int getminvalue(int);
 
 };
 

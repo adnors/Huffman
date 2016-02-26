@@ -7,37 +7,40 @@
 using namespace std;
 
 Encode::Encode(ifstream *f) {
-    datei = f;
+    file = f;
 }
 
 string Encode::doEncode() {
-    getAnzahl();
+    getcntchar();
     buildTree();
 }
 
-void Encode::getAnzahl() {
-    while (!datei->eof()) {
-        getline(*datei, zeile);
-        for (int i = 0; i < zeile.length(); i++) {
-            buchstabe = (int) zeile.at(i);
-            anzahl[buchstabe - 32]++;
-            gesamt++;
+void Encode::getcntchar() {
+    while (!file->eof()) {
+        getline(*file, line);
+        for (int i = 0; i < line.length(); i++) {
+            character = (int) line.at(i);
+            if (cntchar[character - 32] == 0) {
+                cntdiffchar++;
+            }
+            cntchar[character - 32]++;
+            totalchar++;
         }
     }
 }
 
 void Encode::buildTree() {
-    int minValue = getMinValue(0);
-    int minValue2 = getMinValue(minValue);
+    int minValue = getminvalue(0);
+    int minValue2 = getminvalue(minValue);
 
 }
 
-int Encode::getMinValue(int start) {
+int Encode::getminvalue(int start) {
     int i = 0;
-    int minValue = anzahl[i];
-    while (minValue != 0 && i < ANZAHL_ZEICHEN - 1) {
-        if (anzahl[i] < minValue && start <= minValue) {
-            minValue = anzahl[i];
+    int minValue = cntchar[i];
+    while (minValue != 0 && i < CNT_CHAR - 1) {
+        if (cntchar[i] < minValue && start <= minValue) {
+            minValue = cntchar[i];
         }
         i++;
     }

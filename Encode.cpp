@@ -12,7 +12,9 @@ Encode::Encode(ifstream *f) {
 
 string Encode::doEncode() {
     getcntchar();
-    buildTree();
+    Tree *trees[cntdiffchar];
+    buildLeaves(trees);
+    buildTree((Tree *) NULL);
 }
 
 void Encode::getcntchar() {
@@ -29,25 +31,32 @@ void Encode::getcntchar() {
     }
 }
 
-void Encode::buildTree() {
-    int minValue = getminvalue();
-    int minValue2 = getminvalue();
+void Encode::buildLeaves(Tree *trees[]) {
+    int j = 0;
+    for (int i = 0; i < CNT_CHAR; i++) {
+        if (cntchar[i] != 0) {
+            trees[j] = new Tree((Tree *) NULL, (Tree *) NULL, cntchar[i], (char) i + 32);
+            j++;
+        }
+    }
+}
+
+void Encode::buildTree(Tree *root) {
 
 }
 
-int Encode::getminvalue() {
+int Encode::getminvalue(int *minvaluei) {
     int i = 0;
     int minvalue;
-    int minvaluei;
     do {
         minvalue = cntchar[i];
-        minvaluei = i;
+        *minvaluei = i;
         i++;
     } while (minvalue != 0);
     for (i; i < CNT_CHAR - 1; i++) {
         if (cntchar[i] != 0 && cntchar[i] < minvalue) {
             minvalue = cntchar[i];
-            minvaluei = i;
+            *minvaluei = i;
         }
     }
     cntchar[minvaluei] = 0;

@@ -28,6 +28,10 @@ char Tree::getCharacter() {
     return character;
 }
 
+string Tree::toString() {
+
+}
+
 bool Tree::leaf() {
     bool retvalue = false;
     if (rTree == NULL && lTree == NULL) {

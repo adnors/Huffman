@@ -30,12 +30,12 @@ void Encode::getcntchar() {
 }
 
 void Encode::buildTree() {
-    int minValue = getminvalue(0);
-    int minValue2 = getminvalue(minValue);
+    int minValue = getminvalue();
+    int minValue2 = getminvalue();
 
 }
 
-int Encode::getminvalue(int start) {
+int Encode::getminvalue() {
     int i = 0;
     int minvalue;
     int minvaluei;
@@ -45,7 +45,7 @@ int Encode::getminvalue(int start) {
         i++;
     } while (minvalue != 0);
     for (i; i < CNT_CHAR - 1; i++) {
-        if (cntchar[i] < minvalue && start <= minvalue) {
+        if (cntchar[i] != 0 && cntchar[i] < minvalue) {
             minvalue = cntchar[i];
             minvaluei = i;
         }

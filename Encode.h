@@ -27,7 +27,7 @@ public:
     void getcntchar();
     void buildTree();
 
-    int getminvalue(int);
+    int getminvalue();
 
 };
 

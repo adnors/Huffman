@@ -2,7 +2,6 @@
 // Created by Sandro on 23.02.2016.
 //
 
-#include <stddef.h>
 #include "Tree.h"
 
 Tree::Tree(Tree *rightTree, Tree *leftTree, int v, char c) {
@@ -28,8 +27,8 @@ char Tree::getCharacter() {
     return character;
 }
 
-string Tree::toString() {
-
+void Tree::toString() {
+    cout << "Wurzel: " << endl << "Wert: " << this->getValue() << " Char: " << getCharacter() << endl;
 }
 
 bool Tree::leaf() {

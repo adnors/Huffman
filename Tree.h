@@ -5,7 +5,10 @@
 #ifndef HUFFMAN_TREE_H
 #define HUFFMAN_TREE_H
 
+#include <iostream>
 #include <string>
+
+using namespace std;
 
 class Tree {
 private:
@@ -15,13 +18,13 @@ private:
     char character;
 
 public:
-    Tree(Tree *rightTree, Tree *leftTree, int v, char c = '');
+    Tree(Tree *rightTree, Tree *leftTree, int v, char c);
     Tree *getRightTree();
     Tree *getLeftTree();
     int getValue();
     char getCharacter();
 
-    string toString();
+    void toString();
     bool leaf();
 };
 

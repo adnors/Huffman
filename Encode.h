@@ -14,11 +14,11 @@ using namespace std;
 
 class Encode {
 private:
-    int totalchar;
-    int cntdiffchar;
-    int cntchar[CNT_CHAR];
-    int character;
-    string line;
+    int totalchar = 0;
+    int cntdiffchar = 0;
+    int cntchar[CNT_CHAR] = {0};
+    int character = 0;
+    string line = "";
     ifstream *file;
 
 public:

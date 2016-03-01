@@ -14,7 +14,7 @@ string Encode::doEncode() {
     getcntchar();
     Tree *trees[cntdiffchar];
     buildLeaves(trees);
-    buildTree((Tree *) NULL);
+    //buildTree((Tree *) NULL);
 }
 
 void Encode::getcntchar() {
@@ -36,6 +36,7 @@ void Encode::buildLeaves(Tree *trees[]) {
     for (int i = 0; i < CNT_CHAR; i++) {
         if (cntchar[i] != 0) {
             trees[j] = new Tree((Tree *) NULL, (Tree *) NULL, cntchar[i], (char) i + 32);
+            trees[j]->toString();
             j++;
         }
     }
@@ -59,6 +60,6 @@ int Encode::getminvalue(int *minvaluei) {
             *minvaluei = i;
         }
     }
-    cntchar[minvaluei] = 0;
+    cntchar[*minvaluei] = 0;
     return minvalue;
 }

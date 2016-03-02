@@ -29,6 +29,8 @@ public:
 
     void getcntchar();
 
+    bool compTree(Tree *first, Tree *second);
+
     void buildLeaves(Tree *trees[], list<Tree> trees2);
 
     void buildTree(Tree *trees[]);

@@ -6,11 +6,11 @@
 
 using namespace std;
 
-Encode::Encode(ifstream *f) { //Der Encode-Methode wird eine Datei übergeben, die das zu komprimierende Dateimaterial enthält
+Encode::Encode(ifstream *f) {
     file = f;
 }
 
-void Encode::doEncode() { //Hier geschieht die eigentliche Komprimierung.
+void Encode::doEncode() {
     getcntchar();
     list<Tree> trees2;
     Tree *trees[cntdiffchar];
@@ -18,7 +18,7 @@ void Encode::doEncode() { //Hier geschieht die eigentliche Komprimierung.
     buildTree(trees);
 }
 
-void Encode::getcntchar() { //Zählt die Anzahl der Zeichen in der Datei
+void Encode::getcntchar() {
     while (!file->eof()) {
         getline(*file, line);
         for (unsigned int i = 0; i < line.length(); i++) {
@@ -32,22 +32,26 @@ void Encode::getcntchar() { //Zählt die Anzahl der Zeichen in der Datei
     }
 }
 
-void Encode::buildLeaves(Tree *trees[], list<Tree> trees2) { //Erzeugt die einzelnen Knoten des Baums, einen pro unterschiedlichem Zeichen
+bool Encode::compTree(Tree *first, Tree *second) {
+    return first->getValue() <= second->getValue();
+}
+
+void Encode::buildLeaves(Tree *trees[], list<Tree> trees2) {
     int j = 0;
     for (int i = 0; i < CNT_CHAR && j < cntdiffchar; i++) {
         if (cntchar[i] != 0) {
-            trees2.
+            trees2.insert()
             trees[j] = new Tree((Tree *) NULL, (Tree *) NULL, cntchar[i], (char) i + 32);
             j++;
         }
     }
 }
 
-void Encode::buildTree(Tree *trees[]) { //Fügt die separaten Knoten zu einem Baum zusammen.
+void Encode::buildTree(Tree *trees[]) {
 
 }
 
-int Encode::getminvalue(int *minvaluei) { //Gibt das kleinste gefundene Zeichen als ASCII-Wert zurück
+int Encode::getminvalue(int *minvaluei) {
     int i = 0;
     int minvalue;
     do {

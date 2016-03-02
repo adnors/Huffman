@@ -11,27 +11,27 @@ Tree::Tree(Tree *rightTree, Tree *leftTree, int v, char c) {
     character = c;
 }
 
-Tree *Tree::getRightTree() {
+Tree *Tree::getRightTree() { //gibt den rechten Teilbaum zurück
     return rTree;
 }
 
-Tree *Tree::getLeftTree() {
+Tree *Tree::getLeftTree() { //gibt den linken Teilbaum zurück
     return lTree;
 }
 
-int Tree::getValue() {
+int Tree::getValue() { //gibt den Wert des Knotens zurück
     return value;
 }
 
-char Tree::getCharacter() {
+char Tree::getCharacter() { //gibt das Zeichen des Knotens zurück
     return character;
 }
 
-void Tree::toString() {
+void Tree::toString() { //gibt die wichtigsten Attribute eines Knotens als String aus
     cout << "Wurzel: " << endl << "Wert: " << this->getValue() << " Char: " << getCharacter() << endl;
 }
 
-bool Tree::leaf() {
+bool Tree::leaf() { //ermittelt, ob ein Knoten ein Blatt ist oder nicht
     bool retvalue = false;
     if (rTree == NULL && lTree == NULL) {
         retvalue = true;

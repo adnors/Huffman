@@ -38,15 +38,6 @@ string Tree::toString() { //gibt die wichtigsten Attribute eines Knotens als Str
         sstream << "\trechter Teilaum: " << rTree->toString();
     }
     string ret = sstream.str();
-    /*sstream << this->getValue();
-    ret += sstream.str();
-    ret = ret + " Char: ";
-    sstream << this->getCharacter();
-    ret += sstream.str();
-    ret += "\tlinker Teilbaum: ";
-    ret += lTree->toString();
-    ret += "\trechter Teilaum: ";
-    ret += rTree->toString();  */
     return ret;
 }
 

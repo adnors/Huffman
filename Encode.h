@@ -8,6 +8,7 @@
 
 #include <string>
 #include <fstream>
+#include <list>
 #include "Tree.h"
 
 using namespace std;
@@ -28,9 +29,9 @@ public:
 
     void getcntchar();
 
-    void buildLeaves(Tree *trees[]);
+    void buildLeaves(Tree *trees[], list<Tree> trees2);
 
-    void buildTree(Tree *root);
+    void buildTree(Tree *trees[]);
 
     int getminvalue(int *minvaluei);
 

@@ -12,9 +12,10 @@ Encode::Encode(ifstream *f) {
 
 void Encode::doEncode() {
     getcntchar();
+    list<Tree> trees2;
     Tree *trees[cntdiffchar];
-    buildLeaves(trees);
-    //buildTree((Tree *) NULL);
+    buildLeaves(trees, trees2);
+    buildTree(trees);
 }
 
 void Encode::getcntchar() {
@@ -31,18 +32,18 @@ void Encode::getcntchar() {
     }
 }
 
-void Encode::buildLeaves(Tree *trees[]) {
+void Encode::buildLeaves(Tree *trees[], list<Tree> trees2) {
     int j = 0;
     for (int i = 0; i < CNT_CHAR && j < cntdiffchar; i++) {
         if (cntchar[i] != 0) {
+            trees2.
             trees[j] = new Tree((Tree *) NULL, (Tree *) NULL, cntchar[i], (char) i + 32);
-            trees[j]->toString();
             j++;
         }
     }
 }
 
-void Encode::buildTree(Tree *root) {
+void Encode::buildTree(Tree *trees[]) {
 
 }
 

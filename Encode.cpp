@@ -10,7 +10,7 @@ Encode::Encode(ifstream *f) {
     file = f;
 }
 
-string Encode::doEncode() {
+void Encode::doEncode() {
     getcntchar();
     Tree *trees[cntdiffchar];
     buildLeaves(trees);
@@ -20,7 +20,7 @@ string Encode::doEncode() {
 void Encode::getcntchar() {
     while (!file->eof()) {
         getline(*file, line);
-        for (int i = 0; i < line.length(); i++) {
+        for (unsigned int i = 0; i < line.length(); i++) {
             character = (int) line.at(i);
             if (cntchar[character - 32] == 0) {
                 cntdiffchar++;
@@ -33,7 +33,7 @@ void Encode::getcntchar() {
 
 void Encode::buildLeaves(Tree *trees[]) {
     int j = 0;
-    for (int i = 0; i < CNT_CHAR; i++) {
+    for (int i = 0; i < CNT_CHAR && j < cntdiffchar; i++) {
         if (cntchar[i] != 0) {
             trees[j] = new Tree((Tree *) NULL, (Tree *) NULL, cntchar[i], (char) i + 32);
             trees[j]->toString();

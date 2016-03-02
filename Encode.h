@@ -23,7 +23,8 @@ private:
 
 public:
     Encode(ifstream *);
-    string doEncode();
+
+    void doEncode();
 
     void getcntchar();
 

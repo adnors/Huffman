@@ -61,21 +61,3 @@ void Encode::buildTree(list<Tree *> *trees) {
         trees->sort([](Tree *first, Tree *second) { return first->getValue() < second->getValue(); });
     }
 }
-
-/*int Encode::getminvalue(int *minvaluei) {
-    int i = 0;
-    int minvalue;
-    do {
-        minvalue = cntchar[i];
-        *minvaluei = i;
-        i++;
-    } while (minvalue != 0);
-    for (i; i < CNT_CHAR - 1; i++) {
-        if (cntchar[i] != 0 && cntchar[i] < minvalue) {
-            minvalue = cntchar[i];
-            *minvaluei = i;
-        }
-    }
-    cntchar[*minvaluei] = 0;
-    return minvalue;
-}*/

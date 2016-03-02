@@ -32,10 +32,10 @@ string Tree::toString() { //gibt die wichtigsten Attribute eines Knotens als Str
     stringstream sstream;
     sstream << "Wert: " << this->getValue() << " Char: " << this->getCharacter() << endl;
     if (lTree != NULL) {
-        sstream << "\tlinker Teilbaum: " << lTree->toString();
+        sstream << "linker Teilbaum: " << lTree->toString();
     }
     if (rTree != NULL) {
-        sstream << "\trechter Teilaum: " << rTree->toString();
+        sstream << "rechter Teilaum: " << rTree->toString();
     }
     string ret = sstream.str();
     return ret;

@@ -49,7 +49,7 @@ void Encode::buildTree(list<Tree *> *trees) {
     while (trees->size() > 1) {
         it = trees->begin();
         Tree *oldTree1 = *it++;
-        Tree *oldTree2 = *it;
+        Tree *oldTree2 = *it++;
         trees->erase(trees->begin(), it);
         Tree *newTree;
         if (oldTree1->getValue() <= oldTree2->getValue()) {

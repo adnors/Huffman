@@ -30,16 +30,23 @@ char Tree::getCharacter() { //gibt das Zeichen des Knotens zurück
 
 string Tree::toString() { //gibt die wichtigsten Attribute eines Knotens als String aus
     stringstream sstream;
-    string ret = "Wert: ";
-    sstream << this->getValue();
+    sstream << "Wert: " << this->getValue() << " Char: " << this->getCharacter() << endl;
+    if (lTree != NULL) {
+        sstream << "\tlinker Teilbaum: " << lTree->toString();
+    }
+    if (rTree != NULL) {
+        sstream << "\trechter Teilaum: " << rTree->toString();
+    }
+    string ret = sstream.str();
+    /*sstream << this->getValue();
     ret += sstream.str();
-    ret += " Char: ";
+    ret = ret + " Char: ";
     sstream << this->getCharacter();
     ret += sstream.str();
     ret += "\tlinker Teilbaum: ";
     ret += lTree->toString();
     ret += "\trechter Teilaum: ";
-    ret += rTree->toString();
+    ret += rTree->toString();  */
     return ret;
 }
 

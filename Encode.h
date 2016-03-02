@@ -29,11 +29,10 @@ public:
 
     void getcntchar();
 
-    bool compTree(Tree *first, Tree *second);
 
-    void buildLeaves(Tree *trees[], list<Tree> trees2);
+    void buildLeaves(list<Tree> *trees);
 
-    void buildTree(Tree *trees[]);
+    void buildTree(list<Tree> trees);
 
     int getminvalue(int *minvaluei);
 

@@ -12,10 +12,12 @@ Encode::Encode(ifstream *f) {
 
 void Encode::doEncode() {
     getcntchar();
-    list<Tree> trees2;
-    Tree *trees[cntdiffchar];
-    buildLeaves(trees, trees2);
-    buildTree(trees);
+    list<Tree> trees;
+    buildLeaves(&trees);
+    for (list<Tree>::iterator it = trees.begin(); it != trees.end(); it++) {
+        it->toString();
+    }
+    //buildTree(trees);
 }
 
 void Encode::getcntchar() {
@@ -32,22 +34,17 @@ void Encode::getcntchar() {
     }
 }
 
-bool Encode::compTree(Tree *first, Tree *second) {
-    return first->getValue() <= second->getValue();
-}
-
-void Encode::buildLeaves(Tree *trees[], list<Tree> trees2) {
-    int j = 0;
-    for (int i = 0; i < CNT_CHAR && j < cntdiffchar; i++) {
+void Encode::buildLeaves(list<Tree> *trees) {
+    for (int i = 0; i < CNT_CHAR; i++) {
         if (cntchar[i] != 0) {
-            trees2.insert()
-            trees[j] = new Tree((Tree *) NULL, (Tree *) NULL, cntchar[i], (char) i + 32);
-            j++;
+            const Tree *newTree = new Tree((Tree *) NULL, (Tree *) NULL, cntchar[i], (char) i + 32);
+            trees->push_back(*newTree);
         }
     }
+    trees->sort([](Tree first, Tree second) { return first.getValue() < second.getValue(); });
 }
 
-void Encode::buildTree(Tree *trees[]) {
+void Encode::buildTree(list<Tree> trees) {
 
 }
 

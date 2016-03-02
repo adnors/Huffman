@@ -30,11 +30,11 @@ public:
     void getcntchar();
 
 
-    void buildLeaves(list<Tree> *trees);
+    void buildLeaves(list<Tree *> *trees);
 
-    void buildTree(list<Tree> *trees);
+    void buildTree(list<Tree *> *trees);
 
-    int getminvalue(int *minvaluei);
+    //int getminvalue(int *minvaluei);
 
 };
 

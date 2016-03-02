@@ -24,7 +24,7 @@ public:
     int getValue();
     char getCharacter();
 
-    void toString();
+    string toString();
     bool leaf();
 };
 

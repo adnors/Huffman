@@ -12,12 +12,12 @@ Encode::Encode(ifstream *f) {
 
 void Encode::doEncode() {
     getcntchar();
-    list<Tree> trees;
+    list<Tree *> trees;
     buildLeaves(&trees);
-    for (list<Tree>::iterator it = trees.begin(); it != trees.end(); it++) {
-        it->toString();
+    buildTree(&trees);
+    for (list<Tree *>::iterator it = trees.begin(); it != trees.end(); it++) {
+        cout << (*it)->toString();
     }
-    //buildTree(trees);
 }
 
 void Encode::getcntchar() {
@@ -34,25 +34,35 @@ void Encode::getcntchar() {
     }
 }
 
-void Encode::buildLeaves(list<Tree> *trees) {
+void Encode::buildLeaves(list<Tree *> *trees) {
     for (int i = 0; i < CNT_CHAR; i++) {
         if (cntchar[i] != 0) {
-            const Tree *newTree = new Tree((Tree *) NULL, (Tree *) NULL, cntchar[i], (char) (i + 32));
-            trees->push_back(*newTree);
+            Tree *newTree = new Tree((Tree *) NULL, (Tree *) NULL, cntchar[i], (char) (i + 32));
+            trees->push_back(newTree);
         }
     }
-    trees->sort([](Tree first, Tree second) { return first.getValue() < second.getValue(); });
+    trees->sort([](Tree *first, Tree *second) { return first->getValue() < second->getValue(); });
 }
 
-void Encode::buildTree(list<Tree> *trees) {
-    list<Tree>::iterator it;
-    while (trees->size() <= 1) {
+void Encode::buildTree(list<Tree *> *trees) {
+    list<Tree *>::iterator it;
+    while (trees->size() > 1) {
         it = trees->begin();
-        Tree oldTree1 = *it;
+        Tree *oldTree1 = *it++;
+        Tree *oldTree2 = *it;
+        trees->erase(trees->begin(), it);
+        Tree *newTree;
+        if (oldTree1->getValue() <= oldTree2->getValue()) {
+            newTree = new Tree(oldTree1, oldTree2, oldTree1->getValue() + oldTree2->getValue(), (char) 0);
+        } else {
+            newTree = new Tree(oldTree2, oldTree1, oldTree1->getValue() + oldTree2->getValue(), (char) 0);
+        }
+        trees->push_back(newTree);
+        trees->sort([](Tree *first, Tree *second) { return first->getValue() < second->getValue(); });
     }
 }
 
-int Encode::getminvalue(int *minvaluei) {
+/*int Encode::getminvalue(int *minvaluei) {
     int i = 0;
     int minvalue;
     do {
@@ -68,4 +78,4 @@ int Encode::getminvalue(int *minvaluei) {
     }
     cntchar[*minvaluei] = 0;
     return minvalue;
-}
+}*/

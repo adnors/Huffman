@@ -2,6 +2,7 @@
 // Created by Sandro on 23.02.2016.
 //
 
+#include <sstream>
 #include "Tree.h"
 
 Tree::Tree(Tree *rightTree, Tree *leftTree, int v, char c) {
@@ -27,8 +28,19 @@ char Tree::getCharacter() { //gibt das Zeichen des Knotens zurück
     return character;
 }
 
-void Tree::toString() { //gibt die wichtigsten Attribute eines Knotens als String aus
-    cout << "Wurzel: " << endl << "Wert: " << this->getValue() << " Char: " << getCharacter() << endl;
+string Tree::toString() { //gibt die wichtigsten Attribute eines Knotens als String aus
+    stringstream sstream;
+    string ret = "Wert: ";
+    sstream << this->getValue();
+    ret += sstream.str();
+    ret += " Char: ";
+    sstream << this->getCharacter();
+    ret += sstream.str();
+    ret += "\tlinker Teilbaum: ";
+    ret += lTree->toString();
+    ret += "\trechter Teilaum: ";
+    ret += rTree->toString();
+    return ret;
 }
 
 bool Tree::leaf() { //ermittelt, ob ein Knoten ein Blatt ist oder nicht

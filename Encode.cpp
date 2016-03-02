@@ -37,15 +37,19 @@ void Encode::getcntchar() {
 void Encode::buildLeaves(list<Tree> *trees) {
     for (int i = 0; i < CNT_CHAR; i++) {
         if (cntchar[i] != 0) {
-            const Tree *newTree = new Tree((Tree *) NULL, (Tree *) NULL, cntchar[i], (char) i + 32);
+            const Tree *newTree = new Tree((Tree *) NULL, (Tree *) NULL, cntchar[i], (char) (i + 32));
             trees->push_back(*newTree);
         }
     }
     trees->sort([](Tree first, Tree second) { return first.getValue() < second.getValue(); });
 }
 
-void Encode::buildTree(list<Tree> trees) {
-
+void Encode::buildTree(list<Tree> *trees) {
+    list<Tree>::iterator it;
+    while (trees->size() <= 1) {
+        it = trees->begin();
+        Tree oldTree1 = *it;
+    }
 }
 
 int Encode::getminvalue(int *minvaluei) {

@@ -32,7 +32,7 @@ public:
 
     void buildLeaves(list<Tree> *trees);
 
-    void buildTree(list<Tree> trees);
+    void buildTree(list<Tree> *trees);
 
     int getminvalue(int *minvaluei);
 

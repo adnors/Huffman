@@ -20,10 +20,13 @@ private:
     int cntchar[CNT_CHAR] = {0};
     int character = 0;
     string line = "";
-    ifstream *file;
+    char *inputfile;
+    char *outputfile;
+    ifstream input;
+    ofstream output;
 
 public:
-    Encode(ifstream *);
+    Encode(char *, char *);
 
     void doEncode();
 

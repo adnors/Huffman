@@ -6,8 +6,10 @@
 
 using namespace std;
 
-Encode::Encode(ifstream *f) {
-    file = f;
+Encode::Encode(char *i, char *o) {
+    inputfile = i;
+    outputfile = o;
+    output.open(outputfile, ios::out | ios::binary | ios::trunc);
 }
 
 void Encode::doEncode() {
@@ -18,19 +20,24 @@ void Encode::doEncode() {
     for (list<Tree *>::iterator it = trees.begin(); it != trees.end(); it++) {
         cout << (*it)->toString();
     }
+    //output.open(outputfile, ios::out);
 }
 
 void Encode::getcntchar() {
-    while (!file->eof()) {
-        getline(*file, line);
-        for (unsigned int i = 0; i < line.length(); i++) {
-            character = (int) line.at(i);
-            if (cntchar[character - 32] == 0) {
-                cntdiffchar++;
+    input.open(inputfile, ios::in);
+    if (input.is_open()) {
+        while (!input.eof()) {
+            getline(input, line);
+            for (unsigned int i = 0; i < line.length(); i++) {
+                character = (int) line.at(i);
+                if (cntchar[character - 32] == 0) {
+                    cntdiffchar++;
+                }
+                cntchar[character - 32]++;
+                totalchar++;
             }
-            cntchar[character - 32]++;
-            totalchar++;
         }
+        input.close();
     }
 }
 

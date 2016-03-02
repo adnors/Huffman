@@ -2,7 +2,6 @@
 // Created by Sandro on 23.02.2016.
 //
 
-#include <sstream>
 #include "Tree.h"
 
 Tree::Tree(Tree *rightTree, Tree *leftTree, int v, char c) {

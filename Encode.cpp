@@ -13,7 +13,7 @@ Encode::Encode(char *i, char *o) {
 }
 
 /**
- * @brief Diese Methode
+ * @brief Diese Methode enkodiert die Datei.
  * @param
  * @return void
  *

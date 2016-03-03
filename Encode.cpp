@@ -12,6 +12,12 @@ Encode::Encode(char *i, char *o) {
     output.open(outputfile, ios::out | ios::binary | ios::trunc);
 }
 
+/**
+ * @brief Diese Methode
+ * @param
+ * @return void
+ *
+ */
 void Encode::doEncode() {
     getcntchar();
     list<Tree *> trees;
@@ -23,6 +29,9 @@ void Encode::doEncode() {
     //output.open(outputfile, ios::out);
 }
 
+/**
+ *
+ */
 void Encode::getcntchar() {
     input.open(inputfile, ios::in);
     if (input.is_open()) {

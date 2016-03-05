@@ -25,12 +25,12 @@ Encode::Encode(char *i, char *o) {
  * Die Encode-Methode zählt die Zeichen der Eingabedatei, erstellt die entsprechenden Knoten und schließlich den fertigen Baum
  */
 void Encode::doEncode() {
-    getcntchar();
+    getCntChar();
     buildLeaves();
     buildTree();
-    for (list<Tree *>::iterator it = trees.begin(); it != trees.end(); it++) {
+    /*for (list<Tree *>::iterator it = trees.begin(); it != trees.end(); it++) {  //Zum Testen der Baumstruktur
         cout << (*it)->toString();
-    }
+    }*/
     writeFile();
 }
 
@@ -38,17 +38,17 @@ void Encode::doEncode() {
  * @brief Zählt die Zeichen der Eingabedatei
  * @return void
  */
-void Encode::getcntchar() {
+void Encode::getCntChar() {
     input.open(inputfile);
     if (input.is_open()) {
         while (!input.eof()) {
             getline(input, line);
             for (unsigned int i = 0; i < line.length(); i++) {
                 character = (int) line.at(i);
-                if (cntchar[character - 32] == 0) {
+                if (cntChar[character - 32] == 0) {
                     cntdiffchar++;
                 }
-                cntchar[character - 32]++;
+                cntChar[character - 32]++;
                 totalchar++;
             }
         }
@@ -57,13 +57,13 @@ void Encode::getcntchar() {
 }
 
 /**
- * @brief Ereugt die Knoten des Baums
+ * @brief Erzeugt die Knoten des Baums
  * @return void
  */
 void Encode::buildLeaves() {
     for (int i = 0; i < NMBR_CHARS; i++) {
-        if (cntchar[i] != 0) {
-            Tree *newTree = new Tree(nullptr, nullptr, nullptr, cntchar[i], (char) (i + 32));
+        if (cntChar[i] != 0) {
+            Tree *newTree = new Tree(nullptr, nullptr, nullptr, cntChar[i], (char) (i + 32));
             trees.push_back(newTree);
         }
     }
@@ -145,7 +145,7 @@ void Encode::writeCode() {
     list<bool> code = getCode();
     if (output.is_open()) {
         for (list<bool>::iterator it = code.begin(); it != code.end(); it++) {
-            char c;
+            char c = 0;
             for (int i = 0; i < 8 && it != code.end(); i++, it++) {
                 c |= *it;
                 c <<= 1;

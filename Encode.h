@@ -17,7 +17,7 @@ class Encode {
 private:
     int totalchar = 0;
     int cntdiffchar = 0;
-    int cntchar[NMBR_CHARS] = {0};
+    int cntChar[NMBR_CHARS] = {0};
     int character = 0;
     string line = "";
     char *inputfile;
@@ -29,15 +29,14 @@ private:
 public:
     Encode(char *, char *);
     void doEncode();
-    void getcntchar();
+
+    void getCntChar();
     void buildLeaves();
     void buildTree();
     Tree *getCharTree(Tree *, char);
     list<bool> getCharCode(Tree *);
     list<bool> getCode();
-
     void writeCode();
-
     void writeTree();
     void writeFile();
 };

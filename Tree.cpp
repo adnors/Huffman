@@ -4,7 +4,8 @@
 
 #include "Tree.h"
 
-Tree::Tree(Tree *rightTree, Tree *leftTree, int v, char c) {
+Tree::Tree(Tree *r, Tree *rightTree, Tree *leftTree, int v, char c) {
+    root = r;
     rTree = rightTree;
     lTree = leftTree;
     value = v;
@@ -27,6 +28,10 @@ char Tree::getCharacter() { //gibt das Zeichen des Knotens zurück
     return character;
 }
 
+void Tree::setRoot(Tree *r) {
+    root = r;
+}
+
 string Tree::toString() { //gibt die wichtigsten Attribute eines Knotens als String aus
     stringstream sstream;
     sstream << "Wert: " << this->getValue() << " Char: " << this->getCharacter() << endl;
@@ -40,9 +45,9 @@ string Tree::toString() { //gibt die wichtigsten Attribute eines Knotens als Str
     return ret;
 }
 
-bool Tree::leaf() { //ermittelt, ob ein Knoten ein Blatt ist oder nicht
+bool Tree::isLeaf() { //ermittelt, ob ein Knoten ein Blatt ist oder nicht
     bool retvalue = false;
-    if (rTree == NULL && lTree == NULL) {
+    if (rTree == nullptr && lTree == nullptr) {
         retvalue = true;
     }
     return retvalue;

@@ -7,7 +7,7 @@ int main(int argc, char *argv[]) {
 
     ifstream f;
     if (argc >= 2) { //Hiermit wird geprüft, ob die benötigten Parameter gesetzt sind (Dateiname, encode/decode)
-        Encode encode = Encode(argv[1], argv[2]);
+        Encode encode(argv[1], argv[2]);
         encode.doEncode();
     }
     f.close();

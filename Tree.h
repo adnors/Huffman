@@ -13,20 +13,23 @@ using namespace std;
 
 class Tree {
 private:
+    Tree *root;
     Tree *rTree;
     Tree *lTree;
     int value;
     char character;
 
 public:
-    Tree(Tree *rightTree, Tree *leftTree, int v, char c);
+    Tree(Tree *root, Tree *rightTree, Tree *leftTree, int v, char c);
     Tree *getRightTree();
     Tree *getLeftTree();
     int getValue();
     char getCharacter();
 
+    void setRoot(Tree *);
     string toString();
-    bool leaf();
+
+    bool isLeaf();
 };
 
 

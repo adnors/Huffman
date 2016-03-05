@@ -51,9 +51,9 @@ void Encode::getcntchar() {
 }
 
 void Encode::buildLeaves(list<Tree *> *trees) {
-    for (int i = 0; i < CNT_CHAR; i++) {
+    for (int i = 0; i < NMBR_CHARS; i++) {
         if (cntchar[i] != 0) {
-            Tree *newTree = new Tree((Tree *) NULL, (Tree *) NULL, cntchar[i], (char) (i + 32));
+            Tree *newTree = new Tree(nullptr, nullptr, nullptr, cntchar[i], (char) (i + 32));
             trees->push_back(newTree);
         }
     }
@@ -69,11 +69,41 @@ void Encode::buildTree(list<Tree *> *trees) {
         trees->erase(trees->begin(), it);
         Tree *newTree;
         if (oldTree1->getValue() <= oldTree2->getValue()) {
-            newTree = new Tree(oldTree1, oldTree2, oldTree1->getValue() + oldTree2->getValue(), (char) 0);
+            newTree = new Tree(nullptr, oldTree1, oldTree2, oldTree1->getValue() + oldTree2->getValue(), (char) 0);
+            oldTree1->setRoot(newTree);
+            oldTree2->setRoot(newTree);
         } else {
-            newTree = new Tree(oldTree2, oldTree1, oldTree1->getValue() + oldTree2->getValue(), (char) 0);
+            newTree = new Tree(nullptr, oldTree2, oldTree1, oldTree1->getValue() + oldTree2->getValue(), (char) 0);
+            oldTree1->setRoot(newTree);
+            oldTree2->setRoot(newTree);
         }
         trees->push_back(newTree);
         trees->sort([](Tree *first, Tree *second) { return first->getValue() < second->getValue(); });
     }
+}
+
+Tree *Encode::getCharTree(Tree *root, char c) {
+    Tree *charTree;
+    if (root->isLeaf() && root->getCharacter() == c) {
+        charTree = root;
+    } else {
+        if (root->isLeaf() && root->getCharacter() != c) {
+            charTree = nullptr;
+        } else {
+            charTree = getCharTree(root->getLeftTree(), c);
+            if (charTree == nullptr) {
+                charTree = getCharTree(root->getRightTree(), c);
+            }
+        }
+    }
+    return charTree;
+}
+
+char Encode::encodeChar(Tree *tree, char c) {
+    char code;
+    return code;
+}
+
+void Encode::writeFile() {
+
 }

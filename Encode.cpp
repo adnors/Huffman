@@ -1,4 +1,6 @@
 //
+// Diese Klasse komprimiert die Datei an der Stelle input und gibt die neue Datei an der Stelle ouput aus.
+// Zum komprimieren muss die Methode doEncode() gestartet werden.
 // Created by Sandro on 23.02.2016.
 //
 
@@ -9,7 +11,6 @@ using namespace std;
 Encode::Encode(char *i, char *o) {
     inputfile = i;
     outputfile = o;
-    output.open(outputfile, ios::out | ios::binary | ios::trunc);
 }
 
 /**
@@ -26,6 +27,7 @@ void Encode::doEncode() {
     for (list<Tree *>::iterator it = trees.begin(); it != trees.end(); it++) {
         cout << (*it)->toString();
     }
+    writeFile();
     //output.open(outputfile, ios::out);
 }
 
@@ -99,8 +101,15 @@ Tree *Encode::getCharTree(Tree *root, char c) {
     return charTree;
 }
 
-char Encode::encodeChar(Tree *tree, char c) {
-    char code;
+list<bool> Encode::encodeChar(Tree *tree) {
+    list<bool> code;
+    Tree *root = tree->getRoot();
+    if (root->getRoot() != nullptr) {
+        code = encodeChar(root);
+        code.push_back(root->getLeftTree() != tree); // linker Teilbaum -> 0 ; rechter Teilbaum -> 1;
+    } else {
+        code.push_back(root->getLeftTree() != tree); // linker Teilbaum -> 0 ; rechter Teilbaum -> 1;
+    }
     return code;
 }
 

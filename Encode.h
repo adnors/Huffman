@@ -34,7 +34,7 @@ public:
 
     Tree *getCharTree(Tree *, char);
 
-    char encodeChar(Tree *, char);
+    list<bool> encodeChar(Tree *);
 
     void writeFile();
 };

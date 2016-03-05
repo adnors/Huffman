@@ -12,6 +12,10 @@ Tree::Tree(Tree *r, Tree *rightTree, Tree *leftTree, int v, char c) {
     character = c;
 }
 
+Tree *Tree::getRoot() {
+    return root;
+}
+
 Tree *Tree::getRightTree() { //gibt den rechten Teilbaum zurück
     return rTree;
 }

@@ -21,11 +21,12 @@ private:
 
 public:
     Tree(Tree *root, Tree *rightTree, Tree *leftTree, int v, char c);
+
+    Tree *getRoot();
     Tree *getRightTree();
     Tree *getLeftTree();
     int getValue();
     char getCharacter();
-
     void setRoot(Tree *);
     string toString();
 

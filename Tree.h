@@ -21,7 +21,6 @@ private:
 
 public:
     Tree(Tree *root, Tree *rightTree, Tree *leftTree, int v, char c);
-
     Tree *getRoot();
     Tree *getRightTree();
     Tree *getLeftTree();

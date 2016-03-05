@@ -126,37 +126,42 @@ list<bool> Encode::getCharCode(Tree *tree) {
 }
 
 list<bool> Encode::getCode() {
-    input.open(inputfile);
     string line;
     list<bool> code;
     if (input.is_open()) {
-        while (!input.eof()) {
-            getline(input, line);
-            for (unsigned int i = 0; i < line.length(); i++) {
-                code.splice(code.end(), getCharCode(getCharTree(trees.front(), line.at(i))));
-            }
+        getline(input, line);
+        for (unsigned int i = 0; i < line.length(); i++) {
+            code.splice(code.end(), getCharCode(getCharTree(trees.front(), line.at(i))));
         }
-        input.close();
     }
     return code;
 }
 
 void Encode::writeCode() {
-    list<bool> code = getCode();
-    if (output.is_open()) {
-        for (list<bool>::iterator it = code.begin(); it != code.end(); it++) {
-            char c = 0;
-            for (int i = 0; i < 8 && it != code.end(); i++, it++) {
-                c |= *it;
-                c <<= 1;
+    input.open(inputfile);
+    while (!input.eof()) {
+        list<bool> code = getCode();
+        if (output.is_open()) {
+            for (list<bool>::iterator it = code.begin(); it != code.end(); it++) {
+                char c = 0;
+                for (int i = 0; i < 8 && it != code.end(); i++, it++) {
+                    c |= *it;
+                    c <<= 1;
+                }
+                output << c;
             }
-            output.write(&c, 1);
         }
+        output << '\n';
     }
 }
 
 void Encode::writeTree() {
-
+    for (int i = 0; i < NMBR_CHARS; i++) {
+        if (cntChar[i] != 0) {
+            output << (i + 32) << cntChar[i];
+        }
+    }
+    output << '\n';
 }
 
 /**
@@ -164,7 +169,7 @@ void Encode::writeTree() {
  * @return void
  */
 void Encode::writeFile() {
-    output.open(outputfile);
+    output.open(outputfile, ios::binary);
     writeTree();
     writeCode();
     output.close();

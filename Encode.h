@@ -27,21 +27,13 @@ private:
     list<Tree *> trees;
 
     void getCntChar();
-
     void buildLeaves();
-
     void buildTree();
-
     Tree *getCharTree(Tree *, char);
-
     list<bool> getCharCode(Tree *);
-
     list<bool> getCode();
-
     void writeCode();
-
     void writeTree();
-
     void writeFile();
 
 public:

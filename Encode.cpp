@@ -21,9 +21,8 @@ Encode::Encode(char *i, char *o) {
  */
 void Encode::doEncode() {
     getcntchar();
-    list<Tree *> trees;
-    buildLeaves(&trees);
-    buildTree(&trees);
+    buildLeaves();
+    buildTree();
     for (list<Tree *>::iterator it = trees.begin(); it != trees.end(); it++) {
         cout << (*it)->toString();
     }
@@ -35,7 +34,7 @@ void Encode::doEncode() {
  *
  */
 void Encode::getcntchar() {
-    input.open(inputfile, ios::in);
+    input.open(inputfile);
     if (input.is_open()) {
         while (!input.eof()) {
             getline(input, line);
@@ -52,23 +51,23 @@ void Encode::getcntchar() {
     }
 }
 
-void Encode::buildLeaves(list<Tree *> *trees) {
+void Encode::buildLeaves() {
     for (int i = 0; i < NMBR_CHARS; i++) {
         if (cntchar[i] != 0) {
             Tree *newTree = new Tree(nullptr, nullptr, nullptr, cntchar[i], (char) (i + 32));
-            trees->push_back(newTree);
+            trees.push_back(newTree);
         }
     }
-    trees->sort([](Tree *first, Tree *second) { return first->getValue() < second->getValue(); });
+    trees.sort([](Tree *first, Tree *second) { return first->getValue() < second->getValue(); });
 }
 
-void Encode::buildTree(list<Tree *> *trees) {
+void Encode::buildTree() {
     list<Tree *>::iterator it;
-    while (trees->size() > 1) {
-        it = trees->begin();
+    while (trees.size() > 1) {
+        it = trees.begin();
         Tree *oldTree1 = *it++;
         Tree *oldTree2 = *it++;
-        trees->erase(trees->begin(), it);
+        trees.erase(trees.begin(), it);
         Tree *newTree;
         if (oldTree1->getValue() <= oldTree2->getValue()) {
             newTree = new Tree(nullptr, oldTree1, oldTree2, oldTree1->getValue() + oldTree2->getValue(), (char) 0);
@@ -79,8 +78,8 @@ void Encode::buildTree(list<Tree *> *trees) {
             oldTree1->setRoot(newTree);
             oldTree2->setRoot(newTree);
         }
-        trees->push_back(newTree);
-        trees->sort([](Tree *first, Tree *second) { return first->getValue() < second->getValue(); });
+        trees.push_back(newTree);
+        trees.sort([](Tree *first, Tree *second) { return first->getValue() < second->getValue(); });
     }
 }
 
@@ -101,11 +100,11 @@ Tree *Encode::getCharTree(Tree *root, char c) {
     return charTree;
 }
 
-list<bool> Encode::encodeChar(Tree *tree) {
+list<bool> Encode::getCharCode(Tree *tree) {
     list<bool> code;
     Tree *root = tree->getRoot();
     if (root->getRoot() != nullptr) {
-        code = encodeChar(root);
+        code = getCharCode(root);
         code.push_back(root->getLeftTree() != tree); // linker Teilbaum -> 0 ; rechter Teilbaum -> 1;
     } else {
         code.push_back(root->getLeftTree() != tree); // linker Teilbaum -> 0 ; rechter Teilbaum -> 1;
@@ -113,6 +112,23 @@ list<bool> Encode::encodeChar(Tree *tree) {
     return code;
 }
 
+list<bool> Encode::getCode() {
+    input.open(inputfile);
+    string line;
+    list<bool> code;
+    if (input.is_open()) {
+        while (!input.eof()) {
+            getline(input, line);
+            for (unsigned int i = 0; i < line.length(); i++) {
+                code.splice(code.end(), getCharCode(getCharTree(trees.front(), line.at(i))));
+            }
+        }
+        input.close();
+    }
+    return code;
+}
+
 void Encode::writeFile() {
+    list<bool> code = getCode();
 
 }

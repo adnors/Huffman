@@ -24,18 +24,21 @@ private:
     char *outputfile;
     ifstream input;
     ofstream output;
+    list<Tree *> trees;
 
 public:
     Encode(char *, char *);
     void doEncode();
     void getcntchar();
-    void buildLeaves(list<Tree *> *trees);
-    void buildTree(list<Tree *> *trees);
 
+    void buildLeaves();
+
+    void buildTree();
     Tree *getCharTree(Tree *, char);
 
-    list<bool> encodeChar(Tree *);
+    list<bool> getCharCode(Tree *);
 
+    list<bool> getCode();
     void writeFile();
 };
 

@@ -116,7 +116,8 @@ void Encode::writeCode() {
     if (output.is_open() && input.is_open()) {
         while (!input.eof()) {
             list<bool> code = getCode();
-
+            string out = "";
+            int outLength = 0;
             bool itNotEnd = true;
             for (list<bool>::iterator it = code.begin(); itNotEnd;) {
                 char c = 0;
@@ -127,11 +128,12 @@ void Encode::writeCode() {
                     }
                     if (itNotEnd) {
                         c |= *it;
+                        outLength++;
                     }
                 }
-                output << c;
+                out += c;
             }
-            output << '\n';
+            output << outLength << out << '\n';
         }
     }
 }

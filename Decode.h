@@ -12,12 +12,10 @@ using namespace std;
 class Decode : public Code {
 private:
     void parseTree();
-
     void parseText();
 
 public:
     Decode(char *, char *);
-
     void doCode();
 };
 

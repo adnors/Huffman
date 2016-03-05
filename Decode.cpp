@@ -37,10 +37,12 @@ void Decode::parseText() {
         if (output.is_open()) {
             while (!input.eof()) {
                 Tree *tree = trees.front();
+                int length;
+                input >> length;
                 getline(input, line);
                 for (int i = 0; i < line.length(); i++) {
                     char c = line[i];
-                    for (int j = 0; j < 8; j++) {
+                    for (int j = 0; j < 8 && j < length; j++) {
                         bool right = (bool) ((c >> (7 - j)) & 1);
                         tree = right ? tree->getRightTree() : tree->getLeftTree();
                         if (tree->isLeaf()) {
@@ -48,6 +50,7 @@ void Decode::parseText() {
                             tree = trees.front();
                         }
                     }
+                    length -= 8;
                 }
                 output << endl;
             }

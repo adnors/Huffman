@@ -141,7 +141,7 @@ void Encode::writeCode() {
 void Encode::writeTree() {
     for (int i = 0; i < NMBR_CHARS; i++) {
         if (cntChar[i] != 0) {
-            output << (char) (i + 32) << cntChar[i];
+            output << cntChar[i] << " " << (char) (i + 32) << " ";
         }
     }
     output << '\n';

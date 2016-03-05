@@ -22,12 +22,14 @@ void Decode::parseTree() {
         char c;
         int v;
         while (input.peek() != '\n') {
-            input >> c;
             input >> v;
+            input.read(&c, sizeof(char)); // Lese Leerzeichen
+            input.read(&c, sizeof(char));
             trees.push_back(new Tree(nullptr, nullptr, nullptr, v, c));
+            input.read(&c, sizeof(char)); // Lese Leerzeichen
         }
         trees.sort([](Tree *first, Tree *second) { return first->getValue() < second->getValue(); });
-        input.read(&c, 1);
+        input.read(&c, 1); // Lese \n
     }
 }
 
@@ -39,6 +41,7 @@ void Decode::parseText() {
                 Tree *tree = trees.front();
                 int length;
                 input >> length;
+                //getline(input, line); // Lese \n
                 getline(input, line);
                 for (int i = 0; i < line.length(); i++) {
                     char c = line[i];

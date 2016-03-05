@@ -32,7 +32,6 @@ private:
 
 public:
     Encode(char *, char *);
-
     void doCode();
 };
 

@@ -11,31 +11,52 @@ Tree::Tree(Tree *r, Tree *rightTree, Tree *leftTree, int v, char c) {
     value = v;
     character = c;
 }
-
+/**
+ * @brief Gibt die Wurzel des Baums zurück
+ * @return Tree
+ */
 Tree *Tree::getRoot() {
     return root;
 }
-
-Tree *Tree::getRightTree() { //gibt den rechten Teilbaum zurück
+/**
+ * @brief Gibt den rechten Teilbaum zurück
+ * @return Tree
+ */
+Tree *Tree::getRightTree() {
     return rTree;
 }
-
-Tree *Tree::getLeftTree() { //gibt den linken Teilbaum zurück
+/**
+ * @brief Gibt den linken Teilbaum zurück
+ * @return Tree
+ */
+Tree *Tree::getLeftTree() {
     return lTree;
 }
-
-int Tree::getValue() { //gibt den Wert des Knotens zurück
+/**
+ * @brief Gibt den Wert des Knotens zurück
+ * @return int
+ */
+int Tree::getValue() {
     return value;
 }
-
-char Tree::getCharacter() { //gibt das Zeichen des Knotens zurück
+/**
+ * @brief Gibt das Zeichen des Knotens zurück
+ * @return char
+ */
+char Tree::getCharacter() {
     return character;
 }
-
+/**
+ * @brief Bestimmt den Knoten zur Wurzel
+ * @return void
+ */
 void Tree::setRoot(Tree *r) {
     root = r;
 }
-
+/**
+ * @brief Gibt den Baum in der Konsole aus
+ * @return string
+ */
 string Tree::toString() { //gibt die wichtigsten Attribute eines Knotens als String aus
     stringstream sstream;
     sstream << "Wert: " << this->getValue() << " Char: " << this->getCharacter() << endl;
@@ -48,7 +69,10 @@ string Tree::toString() { //gibt die wichtigsten Attribute eines Knotens als Str
     string ret = sstream.str();
     return ret;
 }
-
+/**
+ * @brief Gibt Information darüber, ob ein Knoten ein Blatt ist oder nicht
+ * @return bool
+ */
 bool Tree::isLeaf() { //ermittelt, ob ein Knoten ein Blatt ist oder nicht
     bool retvalue = false;
     if (rTree == nullptr && lTree == nullptr) {

@@ -7,7 +7,12 @@
 #include "Encode.h"
 
 using namespace std;
-
+/**
+ * @brief Diese Methode speichert Ein- bzw. Ausgabedatei.
+ * @param
+ * @return Encode
+ *
+ */
 Encode::Encode(char *i, char *o) {
     inputfile = i;
     outputfile = o;
@@ -17,7 +22,7 @@ Encode::Encode(char *i, char *o) {
  * @brief Diese Methode enkodiert die Datei.
  * @param
  * @return void
- *
+ * Die Encode-Methode zählt die Zeichen der Eingabedatei, erstellt die entsprechenden Knoten und schließlich den fertigen Baum
  */
 void Encode::doEncode() {
     getcntchar();
@@ -30,7 +35,8 @@ void Encode::doEncode() {
 }
 
 /**
- *
+ * @brief Zählt die Zeichen der Eingabedatei
+ * @return void
  */
 void Encode::getcntchar() {
     input.open(inputfile);
@@ -50,6 +56,10 @@ void Encode::getcntchar() {
     }
 }
 
+/**
+ * @brief Ereugt die Knoten des Baums
+ * @return void
+ */
 void Encode::buildLeaves() {
     for (int i = 0; i < NMBR_CHARS; i++) {
         if (cntchar[i] != 0) {
@@ -60,6 +70,10 @@ void Encode::buildLeaves() {
     trees.sort([](Tree *first, Tree *second) { return first->getValue() < second->getValue(); });
 }
 
+/**
+ * @brief Erzeugt den Baum
+ * @return void
+ */
 void Encode::buildTree() {
     list<Tree *>::iterator it;
     while (trees.size() > 1) {
@@ -145,6 +159,10 @@ void Encode::writeTree() {
 
 }
 
+/**
+ * @brief Schreibt die Ausgabedatei
+ * @return void
+ */
 void Encode::writeFile() {
     output.open(outputfile);
     writeTree();

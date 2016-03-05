@@ -5,14 +5,17 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
     if (argc >= 3) { //Hiermit wird geprüft, ob die benötigten Parameter gesetzt sind (Dateiname, encode/decode)
+        Code *code;
         switch (*argv[1]) {
             case 'e':
-                Encode encode(argv[2], argv[3]);
-                encode.doEncode();
+                code = new Encode(argv[2], argv[3]);
+                code->doCode();
+                delete (code);
                 break;
             case 'd':
-                Decode decode(argv[2], argv[3]);
-                decode.doDecode();
+                code = new Decode(argv[2], argv[3]);
+                code->doCode();
+                delete (code);
                 break;
             default:
                 cout << "Falscher Eingabeparameter." << endl;

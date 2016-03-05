@@ -10,25 +10,19 @@
 #include <fstream>
 #include <list>
 #include "Tree.h"
+#include "Code.h"
 
 using namespace std;
 
-class Encode {
+class Encode : public Code {
 private:
     int totalchar = 0;
     int cntdiffchar = 0;
     int cntChar[NMBR_CHARS] = {0};
     int character = 0;
-    string line = "";
-    char *inputfile;
-    char *outputfile;
-    ifstream input;
-    ofstream output;
-    list<Tree *> trees;
 
     void getCntChar();
     void buildLeaves();
-    void buildTree();
     Tree *getCharTree(Tree *, char);
     list<bool> getCharCode(Tree *);
     list<bool> getCode();
@@ -38,7 +32,8 @@ private:
 
 public:
     Encode(char *, char *);
-    void doEncode();
+
+    void doCode();
 };
 
 #endif //HUFFMAN_ENCODE_H

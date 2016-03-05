@@ -1,6 +1,6 @@
 //
 // Diese Klasse komprimiert die Datei an der Stelle input und gibt die neue Datei an der Stelle ouput aus.
-// Zum komprimieren muss die Methode doEncode() gestartet werden.
+// Zum komprimieren muss die Methode doCode() gestartet werden.
 // Created by Sandro on 23.02.2016.
 //
 
@@ -24,7 +24,7 @@ Encode::Encode(char *i, char *o) {
  * @return void
  * Die Encode-Methode zählt die Zeichen der Eingabedatei, erstellt die entsprechenden Knoten und schließlich den fertigen Baum
  */
-void Encode::doEncode() {
+void Encode::doCode() {
     getCntChar();
     buildLeaves();
     buildTree();
@@ -44,7 +44,7 @@ void Encode::getCntChar() {
         while (!input.eof()) {
             getline(input, line);
             for (unsigned int i = 0; i < line.length(); i++) {
-                character = (int) line.at(i);
+                character = (int) line[i];
                 if (cntChar[character - 32] == 0) {
                     cntdiffchar++;
                 }
@@ -70,31 +70,6 @@ void Encode::buildLeaves() {
     trees.sort([](Tree *first, Tree *second) { return first->getValue() < second->getValue(); });
 }
 
-/**
- * @brief Erzeugt den Baum
- * @return void
- */
-void Encode::buildTree() {
-    list<Tree *>::iterator it;
-    while (trees.size() > 1) {
-        it = trees.begin();
-        Tree *oldTree1 = *it++;
-        Tree *oldTree2 = *it++;
-        trees.erase(trees.begin(), it);
-        Tree *newTree;
-        if (oldTree1->getValue() <= oldTree2->getValue()) {
-            newTree = new Tree(nullptr, oldTree1, oldTree2, oldTree1->getValue() + oldTree2->getValue(), (char) 0);
-            oldTree1->setRoot(newTree);
-            oldTree2->setRoot(newTree);
-        } else {
-            newTree = new Tree(nullptr, oldTree2, oldTree1, oldTree1->getValue() + oldTree2->getValue(), (char) 0);
-            oldTree1->setRoot(newTree);
-            oldTree2->setRoot(newTree);
-        }
-        trees.push_back(newTree);
-        trees.sort([](Tree *first, Tree *second) { return first->getValue() < second->getValue(); });
-    }
-}
 
 Tree *Encode::getCharTree(Tree *root, char c) {
     Tree *charTree;
@@ -131,7 +106,7 @@ list<bool> Encode::getCode() {
     if (input.is_open()) {
         getline(input, line);
         for (unsigned int i = 0; i < line.length(); i++) {
-            code.splice(code.end(), getCharCode(getCharTree(trees.front(), line.at(i))));
+            code.splice(code.end(), getCharCode(getCharTree(trees.front(), line[i])));
         }
     }
     return code;
@@ -142,7 +117,7 @@ void Encode::writeCode() {
     while (!input.eof()) {
         list<bool> code = getCode();
         if (output.is_open()) {
-            for (list<bool>::iterator it = code.begin(); it != code.end(); it++) {
+            for (list<bool>::iterator it = code.begin(); it != code.end();) {
                 char c = 0;
                 for (int i = 0; i < 8 && it != code.end(); i++, it++) {
                     c |= *it;
@@ -150,15 +125,15 @@ void Encode::writeCode() {
                 }
                 output << c;
             }
+            output << '\n';
         }
-        output << '\n';
     }
 }
 
 void Encode::writeTree() {
     for (int i = 0; i < NMBR_CHARS; i++) {
         if (cntChar[i] != 0) {
-            output << (i + 32) << cntChar[i];
+            output << (char) (i + 32) << cntChar[i];
         }
     }
     output << '\n';

@@ -5,21 +5,20 @@
 #ifndef HUFFMAN_DECODE_H
 #define HUFFMAN_DECODE_H
 
-#include <fstream>
+#include "Code.h"
 
 using namespace std;
 
-class Decode {
+class Decode : public Code {
 private:
-    char *inputfile;
-    char *outputfile;
-    ifstream input;
-    ofstream output;
+    void parseTree();
+
+    void parseText();
 
 public:
     Decode(char *, char *);
 
-    void doDecode();
+    void doCode();
 };
 
 

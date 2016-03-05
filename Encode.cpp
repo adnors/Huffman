@@ -70,7 +70,6 @@ void Encode::buildLeaves() {
     trees.sort([](Tree *first, Tree *second) { return first->getValue() < second->getValue(); });
 }
 
-
 Tree *Encode::getCharTree(Tree *root, char c) {
     Tree *charTree;
     if (root->isLeaf() && root->getCharacter() == c) {
@@ -114,14 +113,21 @@ list<bool> Encode::getCode() {
 
 void Encode::writeCode() {
     input.open(inputfile);
-    while (!input.eof()) {
-        list<bool> code = getCode();
-        if (output.is_open()) {
-            for (list<bool>::iterator it = code.begin(); it != code.end();) {
+    if (output.is_open() && input.is_open()) {
+        while (!input.eof()) {
+            list<bool> code = getCode();
+
+            bool itNotEnd = true;
+            for (list<bool>::iterator it = code.begin(); itNotEnd;) {
                 char c = 0;
-                for (int i = 0; i < 8 && it != code.end(); i++, it++) {
-                    c |= *it;
+                for (int i = 0; i < 8; i++, it++) {
                     c <<= 1;
+                    if (it == code.end()) {
+                        itNotEnd = false;
+                    }
+                    if (itNotEnd) {
+                        c |= *it;
+                    }
                 }
                 output << c;
             }

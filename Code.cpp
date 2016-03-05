@@ -16,7 +16,7 @@ void Code::buildTree() {
         Tree *oldTree2 = *it++;
         trees.erase(trees.begin(), it);
         Tree *newTree;
-        if (oldTree1->getValue() <= oldTree2->getValue()) {
+        if (oldTree1->getValue() >= oldTree2->getValue()) {
             newTree = new Tree(nullptr, oldTree1, oldTree2, oldTree1->getValue() + oldTree2->getValue(), (char) 0);
             oldTree1->setRoot(newTree);
             oldTree2->setRoot(newTree);

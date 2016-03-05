@@ -26,6 +26,7 @@ void Decode::parseTree() {
             input >> v;
             trees.push_back(new Tree(nullptr, nullptr, nullptr, v, c));
         }
+        trees.sort([](Tree *first, Tree *second) { return first->getValue() < second->getValue(); });
         input.read(&c, 1);
     }
 }
@@ -40,7 +41,7 @@ void Decode::parseText() {
                 for (int i = 0; i < line.length(); i++) {
                     char c = line[i];
                     for (int j = 0; j < 8; j++) {
-                        bool right = (bool) ((c >> (8 - j)) & 1);
+                        bool right = (bool) ((c >> (7 - j)) & 1);
                         tree = right ? tree->getRightTree() : tree->getLeftTree();
                         if (tree->isLeaf()) {
                             output << tree->getCharacter();

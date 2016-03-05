@@ -27,7 +27,6 @@ void Encode::doEncode() {
         cout << (*it)->toString();
     }
     writeFile();
-    //output.open(outputfile, ios::out);
 }
 
 /**
@@ -128,7 +127,27 @@ list<bool> Encode::getCode() {
     return code;
 }
 
-void Encode::writeFile() {
+void Encode::writeCode() {
     list<bool> code = getCode();
+    if (output.is_open()) {
+        for (list<bool>::iterator it = code.begin(); it != code.end(); it++) {
+            char c;
+            for (int i = 0; i < 8 && it != code.end(); i++, it++) {
+                c |= *it;
+                c <<= 1;
+            }
+            output.write(&c, 1);
+        }
+    }
+}
 
+void Encode::writeTree() {
+
+}
+
+void Encode::writeFile() {
+    output.open(outputfile);
+    writeTree();
+    writeCode();
+    output.close();
 }

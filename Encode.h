@@ -30,15 +30,15 @@ public:
     Encode(char *, char *);
     void doEncode();
     void getcntchar();
-
     void buildLeaves();
-
     void buildTree();
     Tree *getCharTree(Tree *, char);
-
     list<bool> getCharCode(Tree *);
-
     list<bool> getCode();
+
+    void writeCode();
+
+    void writeTree();
     void writeFile();
 };
 

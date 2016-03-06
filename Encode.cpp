@@ -1,8 +1,11 @@
 //
 // Diese Klasse komprimiert die Datei an der Stelle input und gibt die neue Datei an der Stelle ouput aus.
 // Zum komprimieren muss die Methode doCode() gestartet werden.
-// Created by Sandro on 23.02.2016.
 //
+/**
+ * @author Sandro Käppner, Daniel Hänsler
+ */
+
 
 #include "Encode.h"
 

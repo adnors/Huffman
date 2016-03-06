@@ -1,6 +1,7 @@
-//
-// Created by Sandro on 23.02.2016.
-//
+/**
+ * @author Sandro Käppner, Daniel Hänsler
+ */
+
 
 #ifndef HUFFMAN_ENCODE_H
 #define HUFFMAN_ENCODE_H

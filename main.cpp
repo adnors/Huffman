@@ -1,3 +1,7 @@
+/**
+ * @author Sandro Käppner, Daniel Hänsler
+ */
+
 #include "Encode.h"
 #include "Decode.h"
 

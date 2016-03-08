@@ -18,23 +18,23 @@ using namespace std;
 
 class Encode : public Code {
 private:
-    int totalchar = 0;
-    int cntdiffchar = 0;
-    int cntChar[NMBR_CHARS] = {0};
-    int character = 0;
+    int totalchar = 0; //Gesamtanzahl der Zeichen in der Eingabedatei
+    int cntdiffchar = 0; //Anzahl der verschiedenen Zeichen in der Eingabedatei
+    int cntChar[NMBR_CHARS] = {0}; //Array, in dem die Häufigkeiten der Buchstaben gespeichert werden
+    int character = 0; 
 
-    void getCntChar();
-    void buildLeaves();
-    Tree *getCharTree(Tree *, char);
-    list<bool> getCharCode(Tree *);
+    void getCntChar(); //gibt die Anzahl gelesener Zeichen zurück
+    void buildLeaves(); //erzeugt ein Blatt für einen Buchstaben
+    Tree *getCharTree(Tree *, char); //Liefert den Knoten eines Baumes zurück, der den übergebenen Buchstaben enthält
+    list<bool> getCharCode(Tree *); //Liefert die Bitkodierung als Liste zurück
     list<bool> getCode();
-    void writeCode();
-    void writeTree();
-    void writeFile();
+    void writeCode(); //Schreibt den Code in die Datei
+    void writeTree(); //Erzeugt den Baum
+    void writeFile(); //Schreibt die Komprimierungsdatei
 
 public:
-    Encode(char *, char *);
-    void doCode();
+    Encode(char *, char *); // Konstruktor
+    void doCode(); //Startet die Komprimierung
 };
 
 #endif //HUFFMAN_ENCODE_H

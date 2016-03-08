@@ -34,7 +34,8 @@ void Decode::doCode() {
 /**
  * @brief Hilfsmethode zum parsen des Baums aus der Datei
  *
- *
+ * Solange man noch in der ersten Zeile ist, wird abwechselnd die Anzahl des Zeichens und das Zeichen eingelesen.
+ * Dazwischen steht immer ein Leerzeichen. Am Ende wird noch das Enter gelesen.
  */
 void Decode::parseTree() {
     if (input.is_open()) {
@@ -55,24 +56,25 @@ void Decode::parseTree() {
 /**
  * @brief Hilfsmethode zum parsen des Texts
  *
- * Wenn die Dateien offen sind
+ * Wenn die Dateien offen sind, wird die Inputdatei zeilenweise durchgegangen und jedes Zeichen bitweise gelesen.
  */
 void Decode::parseText() {
     if (input.is_open()) {
         output.open(outputfile);
         if (output.is_open()) {
-            while (!input.eof()) {
-                Tree *tree = trees.front();
+            while (!input.eof()) { // Solange die Datei nicht leer ist:
+                Tree *tree = trees.front(); // Die Wurzel auswählen
                 int length;
-                input >> length;
+                input >> length; // Länge der Zeile lesen
                 getline(input, line); // Lese \n
-                getline(input, line);
-                for (int i = 0; i < line.length(); i++) {
+                getline(input, line); // Zeile lesen
+                for (int i = 0; i < line.length(); i++) { // Zeile bearbeiten
                     char c = line[i];
-                    for (int j = 0; j < 8 && j < length; j++) {
+                    for (int j = 0; j < 8 && j < length; j++) { // Die einzelnen Bits lesen
                         bool right = (bool) ((c >> (7 - j)) & 1);
-                        tree = right ? tree->getRightTree() : tree->getLeftTree();
-                        if (tree->isLeaf()) {
+                        tree = right ? tree->getRightTree()
+                                     : tree->getLeftTree(); // 0-->linker Teilbaum; 1-->rechter Teilbaum
+                        if (tree->isLeaf()) { // Wenn das Ende erreicht ist, den gefundenen Buchstaben schreiben
                             output << tree->getCharacter();
                             tree = trees.front();
                         }

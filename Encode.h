@@ -21,7 +21,6 @@ private:
     int totalchar = 0; //Gesamtanzahl der Zeichen in der Eingabedatei
     int cntdiffchar = 0; //Anzahl der verschiedenen Zeichen in der Eingabedatei
     int cntChar[NMBR_CHARS] = {0}; //Array, in dem die Häufigkeiten der Buchstaben gespeichert werden
-    int character = 0; 
 
     void getCntChar(); //gibt die Anzahl gelesener Zeichen zurück
     void buildLeaves(); //erzeugt ein Blatt für einen Buchstaben

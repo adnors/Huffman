@@ -1,4 +1,5 @@
 /**
+ * Klasse zum Entpacken der komprimierenten Datei
  * @author Sandro Käppner, Daniel Hänsler
  */
 
@@ -12,12 +13,12 @@ using namespace std;
 
 class Decode : public Code {
 private:
-    void parseTree();
-    void parseText();
+    void parseTree(); // Hilfsmethode zum parsen des Baums
+    void parseText(); // Hilfsmethode zum parsen des Texts
 
 public:
-    Decode(char *, char *);
-    void doCode();
+    Decode(char *, char *); // Konstruktor mit Dateinamen
+    void doCode(); // führt alle Schritte zum Entpacken der Datei aus
 };
 
 

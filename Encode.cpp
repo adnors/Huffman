@@ -136,7 +136,7 @@ void Encode::writeCode() {
                 }
                 out += c;
             }
-            output << outLength << out << '\n';
+            output << outLength << '\n' << out << '\n';
         }
     }
 }
